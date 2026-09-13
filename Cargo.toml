@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "crates/cn105-proto",
+    "crates/hvac-esp32",
+    "crates/sensor-esp32",
+    "crates/core-hub",
+]
+resolver = "2"

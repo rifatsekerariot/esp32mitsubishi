@@ -1,0 +1,20 @@
+[package]
+name = "hvac-esp32"
+version = "0.1.0"
+edition = "2021"
+description = "ESP32 Firmware in Rust for Mitsubishi CN105 HVAC Control"
+
+[dependencies]
+cn105-proto = { path = "../cn105-proto" }
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+log = "0.4"
+
+# Standard ESP-IDF dependencies (enabled when compiling for xtensa-esp32-espidf or riscv32imc-esp-espidf)
+[target.'cfg(target_os = "espidf")'.dependencies]
+esp-idf-svc = { version = "0.49", features = ["std"] }
+esp-idf-hal = "0.44"
+embedded-svc = "0.28"
+
+[build-dependencies]
+embuild = "0.32"

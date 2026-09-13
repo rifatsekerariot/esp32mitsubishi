@@ -1,0 +1,1098 @@
+/* ==========================================================================
+   AuraClimate Industrial Corporate Light Edition — Swiss Precision UI
+   Aesthetic: Clean Architectural Engineering (Dieter Rams / B&O / Siemens Pro)
+   Typography: Space Grotesk (Brand & Headers), JetBrains Mono (Telemetry), Plus Jakarta Sans (UI)
+   ========================================================================== */
+
+:root {
+  /* Corporate Clean Light Palette */
+  --canvas-bg: #f3f5f9;
+  --chassis-base: #ffffff;
+  --chassis-card: #f8fafc;
+  --chassis-card-elevated: #ffffff;
+  --chassis-hover: #edf2f7;
+  --chassis-active: #e2e8f0;
+  
+  /* Precision Borders */
+  --border-subtle: #f1f5f9;
+  --border-crisp: #e2e8f0;
+  --border-highlight: #cbd5e1;
+  --border-dark: #94a3b8;
+
+  /* Corporate High-Contrast Typography */
+  --text-pure: #0f172a;       /* Deep corporate navy-black */
+  --text-main: #1e293b;       /* Dark slate */
+  --text-dim: #475569;        /* Medium slate */
+  --text-ghost: #64748b;      /* Muted technical gray */
+
+  /* Corporate Indicator Accents */
+  --led-heat: #dc2626;        /* Corporate vermilion */
+  --led-heat-dim: rgba(220, 38, 38, 0.08);
+  --led-cool: #0284c7;        /* Engineering cobalt */
+  --led-cool-dim: rgba(2, 132, 199, 0.08);
+  --led-emerald: #059669;     /* Precision emerald */
+  --led-emerald-dim: rgba(5, 150, 105, 0.08);
+  --led-amber: #d97706;       /* Industrial amber */
+  --led-amber-dim: rgba(217, 119, 6, 0.08);
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+
+  /* Geometry */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-round: 9999px;
+
+  /* Mechanical Physics */
+  --spring-press: all 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --spring-smooth: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--canvas-bg);
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(2, 132, 199, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(220, 38, 38, 0.03) 0%, transparent 40%),
+    linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.text-amber { color: var(--led-amber); }
+.text-emerald { color: var(--led-emerald); }
+.text-cool { color: var(--led-cool); }
+.text-heat { color: var(--led-heat); }
+
+/* Main Shell */
+.terminal-shell {
+  width: 100%;
+  max-width: 1360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ==========================================================================
+   1. TOP TELEMETRY INSTRUMENT BAR
+   ========================================================================== */
+.instrument-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  background: var(--chassis-base);
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.system-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.system-logo-mark {
+  width: 36px;
+  height: 36px;
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mark-core {
+  width: 14px;
+  height: 14px;
+  background: var(--led-emerald);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(5, 150, 105, 0.4);
+}
+
+.sys-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--text-pure);
+}
+
+.sys-version {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  background: #f1f5f9;
+  border: 1px solid var(--border-crisp);
+  border-radius: 3px;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.sys-meta {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+
+.rack-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f8fafc;
+  padding: 7px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-crisp);
+}
+
+.stat-unit {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+  letter-spacing: 0.06em;
+}
+
+.stat-val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+.stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--border-crisp);
+}
+
+.clock-rack {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.comm-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--led-emerald-dim);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
+}
+
+.comm-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--led-emerald);
+}
+
+.comm-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--led-emerald);
+  letter-spacing: 0.04em;
+}
+
+.time-readout {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+/* ==========================================================================
+   2. HVAC DEVICE TABS & RACK ACTIONS
+   ========================================================================== */
+.hvac-rack-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--chassis-base);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-crisp);
+  box-shadow: var(--shadow-sm);
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.rack-tabs {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.rack-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: var(--spring-press);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.rack-tab-btn:hover {
+  background: var(--chassis-hover);
+  color: var(--text-pure);
+}
+
+.rack-tab-btn.active {
+  background: #ffffff;
+  border-color: var(--text-pure);
+  color: var(--text-pure);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.tab-status-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-highlight);
+}
+
+.tab-status-led.on {
+  background: var(--led-emerald);
+  box-shadow: 0 0 6px rgba(5, 150, 105, 0.6);
+}
+
+.rack-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rack-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px dashed var(--border-highlight);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--spring-press);
+}
+
+.rack-action-btn:hover {
+  background: #f1f5f9;
+  border-color: var(--text-pure);
+  color: var(--text-pure);
+}
+
+/* ==========================================================================
+   3. CONTROL MATRIX (MAIN SPLIT VIEW)
+   ========================================================================== */
+.control-matrix {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 16px;
+}
+
+@media (max-width: 960px) {
+  .control-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SOL: SEÇİLİ KLİMA KONSOLU */
+.instrument-console {
+  background: var(--chassis-base);
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.console-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-crisp);
+  padding-bottom: 16px;
+}
+
+.console-unit-info h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-pure);
+  letter-spacing: -0.01em;
+}
+
+.console-unit-meta {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.console-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mekanik Güç Butonu */
+.mech-power-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--spring-press);
+}
+
+.mech-power-btn:hover {
+  background: #f1f5f9;
+}
+
+.mech-power-btn.active {
+  background: var(--led-heat-dim);
+  border-color: var(--led-heat);
+  color: var(--led-heat);
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.15);
+}
+
+.mech-power-btn .power-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-highlight);
+}
+
+.mech-power-btn.active .power-led {
+  background: var(--led-heat);
+  box-shadow: 0 0 6px var(--led-heat);
+}
+
+/* Termostat Kadranı ve Büyük Gösterge */
+.dial-gauge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 10px 0;
+}
+
+.dial-instrument {
+  position: relative;
+  width: 280px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dial-track-arc {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 13;
+  stroke-linecap: round;
+}
+
+.dial-active-arc {
+  fill: none;
+  stroke: var(--led-heat);
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-dasharray: 480;
+  stroke-dashoffset: 160;
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+}
+
+.dial-readout-block {
+  z-index: 2;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.dial-temp-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+  letter-spacing: 0.08em;
+}
+
+.dial-primary-temp {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-pure);
+  letter-spacing: -0.04em;
+  margin: 6px 0 12px;
+}
+
+.dial-primary-temp small {
+  font-size: 1.6rem;
+  color: var(--text-ghost);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.stepper-control-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f8fafc;
+  padding: 6px 14px;
+  border-radius: var(--radius-round);
+  border: 1px solid var(--border-crisp);
+  box-shadow: var(--shadow-sm);
+}
+
+.stepper-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-crisp);
+  background: #ffffff;
+  color: var(--text-pure);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--spring-press);
+  box-shadow: var(--shadow-sm);
+}
+
+.stepper-btn:hover {
+  background: var(--chassis-hover);
+  border-color: var(--border-highlight);
+}
+
+.stepper-btn:active {
+  transform: scale(0.92);
+}
+
+.target-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.target-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-dim);
+}
+
+.target-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--led-heat);
+}
+
+/* Enstrüman Seçici Şeritleri (Mod, Fan, Kanat) */
+.instrument-selector-rack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--border-crisp);
+  padding-top: 16px;
+}
+
+.selector-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selector-strip-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.selector-button-bar {
+  display: flex;
+  background: #f1f5f9;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  gap: 4px;
+}
+
+.inst-btn {
+  flex: 1;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--spring-press);
+  text-align: center;
+}
+
+.inst-btn:hover {
+  color: var(--text-pure);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.inst-btn.active {
+  background: #ffffff;
+  color: var(--text-pure);
+  border-color: var(--border-crisp);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.selector-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Gerçek Zamanlı Kompresör ve Tüketim Şeridi */
+.live-telemetry-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  gap: 12px;
+}
+
+.telem-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.telem-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+  letter-spacing: 0.06em;
+}
+
+.telem-reading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+/* ==========================================================================
+   4. SAĞ PANEL: SENSÖR MATRİSİ VE ODA GRAFİĞİ
+   ========================================================================== */
+.sensor-matrix-panel {
+  background: var(--chassis-base);
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+.panel-rack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-crisp);
+  padding-bottom: 14px;
+}
+
+.rack-tag {
+  font-size: 0.65rem;
+  color: var(--led-emerald);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.panel-rack-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-pure);
+  margin-top: 2px;
+}
+
+.orchestrator-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--led-emerald-dim);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+}
+
+.beacon-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--led-emerald);
+}
+
+.beacon-text {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--led-emerald);
+}
+
+/* Sensör Kartları Izgarası */
+.sensor-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 650px) {
+  .sensor-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sensor-node-card {
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--spring-smooth);
+}
+
+.sensor-node-card:hover {
+  background: #ffffff;
+  border-color: var(--border-highlight);
+  box-shadow: var(--shadow-sm);
+}
+
+.sensor-node-card.bound-to-active {
+  background: #ffffff;
+  border-color: var(--led-cool);
+  box-shadow: 0 0 15px rgba(2, 132, 199, 0.12);
+}
+
+.node-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.node-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.node-zone-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+.node-hardware-id {
+  font-size: 0.65rem;
+  color: var(--text-ghost);
+  font-weight: 600;
+}
+
+.radar-motion-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: #edf2f7;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+}
+
+.radar-motion-indicator.active {
+  background: var(--led-emerald-dim);
+  color: var(--led-emerald);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.radar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.node-readouts {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.node-temp-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text-pure);
+  line-height: 1;
+}
+
+.node-temp-display small {
+  font-size: 0.95rem;
+  color: var(--text-ghost);
+  font-weight: 500;
+}
+
+.node-humidity-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.node-footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-crisp);
+  padding-top: 10px;
+  font-size: 0.68rem;
+  color: var(--text-ghost);
+  font-weight: 600;
+}
+
+.bind-node-btn {
+  background: #ffffff;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-xs);
+  color: var(--text-dim);
+  padding: 4px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--spring-press);
+}
+
+.bind-node-btn:hover {
+  color: var(--text-pure);
+  border-color: var(--text-pure);
+}
+
+.bind-node-btn.bound {
+  background: var(--led-cool-dim);
+  border-color: var(--led-cool);
+  color: var(--led-cool);
+}
+
+/* Teşhis ve Koruma Terminali */
+.diagnostics-terminal {
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.diag-header {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-crisp);
+  padding-bottom: 6px;
+}
+
+.diag-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diag-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+}
+
+.diag-key {
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.diag-val {
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+/* ==========================================================================
+   5. ALT KONSOL: GLOBAL PRESET ANAHTARLARI
+   ========================================================================== */
+.system-footer-rack {
+  display: flex;
+  align-items: center;
+  background: var(--chassis-base);
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  gap: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.footer-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-ghost);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.preset-switch-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  flex: 1;
+}
+
+@media (max-width: 800px) {
+  .preset-switch-group {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.preset-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: var(--spring-press);
+  text-align: left;
+}
+
+.preset-switch:hover {
+  background: #f1f5f9;
+}
+
+.preset-switch.active {
+  background: #ffffff;
+  border-color: var(--text-pure);
+  box-shadow: var(--shadow-sm);
+}
+
+.switch-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #cbd5e1;
+  border: 1px solid var(--border-crisp);
+}
+
+.preset-switch.active .switch-indicator {
+  background: var(--led-emerald);
+  box-shadow: 0 0 6px rgba(5, 150, 105, 0.4);
+}
+
+.switch-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.switch-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+.switch-sub {
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   6. MODAL & FORMLAR
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-crisp);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-pure);
+  letter-spacing: 0.04em;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.form-input, .form-select {
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  color: var(--text-pure);
+  font-size: 0.88rem;
+  font-weight: 600;
+  outline: none;
+  transition: var(--spring-press);
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--led-cool);
+  background: #ffffff;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cancel {
+  background: #f8fafc;
+  border: 1px solid var(--border-crisp);
+  padding: 9px 16px;
+  border-radius: var(--radius-xs);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background: var(--text-pure);
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-xs);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+[package]
+name = "sensor-esp32"
+version = "0.1.0"
+edition = "2021"
+description = "ESP32 Firmware in Rust for Room Sensors (Temperature, Humidity, Presence)"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+
+[target.'cfg(target_os = "espidf")'.dependencies]
+esp-idf-svc = { version = "0.49", features = ["std"] }
+esp-idf-hal = "0.44"
+embedded-svc = "0.28"

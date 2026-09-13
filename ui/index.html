@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CN105 • Endüstriyel İklimlendirme & Sensör Matrisi</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-shell">
+    
+    <!-- ÜST ENSTRÜMAN ÇUBUĞU (TELEMETRY TOPBAR) -->
+    <header class="instrument-header">
+      <div class="system-identity">
+        <div class="system-logo-mark">
+          <span class="mark-core"></span>
+        </div>
+        <div class="identity-text">
+          <div class="sys-title">CN105 HVAC CORE <span class="sys-version">v2.4-RS</span></div>
+          <div class="sys-meta">PI ZERO 2W • DİNAMİK ÇOKLU BÖLGE ORKESTRASYONU</div>
+        </div>
+      </div>
+
+      <div class="rack-stats">
+        <div class="stat-unit">
+          <span class="stat-label">KLİMA</span>
+          <span class="stat-val font-mono" id="hvacCountLabel">02 AKTİF</span>
+        </div>
+        <div class="stat-separator"></div>
+        <div class="stat-unit">
+          <span class="stat-label">SENSÖR DÜĞÜMÜ</span>
+          <span class="stat-val font-mono" id="sensorCountLabel">04 BAĞLI</span>
+        </div>
+        <div class="stat-separator"></div>
+        <div class="stat-unit">
+          <span class="stat-label">TOPLAM GÜÇ</span>
+          <span class="stat-val font-mono text-amber" id="totalPowerLabel">410 W</span>
+        </div>
+      </div>
+
+      <div class="clock-rack">
+        <div class="comm-indicator" id="commStatusBadge">
+          <span class="comm-led"></span>
+          <span class="comm-text font-mono" id="commText">WEBSOCKET AKTİF</span>
+        </div>
+        <div class="time-readout font-mono" id="liveClock">21:42:00</div>
+      </div>
+    </header>
+
+    <!-- KLİMA SEÇİM VE CİHAZ YÖNETİM RAFI (HVAC SELECTOR RACK) -->
+    <nav class="hvac-rack-bar">
+      <div class="rack-tabs" id="hvacTabsContainer">
+        <!-- Dinamik olarak JS tarafından üretilir -->
+      </div>
+      <div class="rack-actions">
+        <button class="rack-action-btn" id="openAddHvacModalBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          KLİMA EKLE
+        </button>
+        <button class="rack-action-btn" id="openAddSensorModalBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          SENSÖR DÜĞÜMÜ EKLE
+        </button>
+      </div>
+    </nav>
+
+    <!-- ANA MATRİS (SPLIT WORKSPACE) -->
+    <main class="control-matrix">
+      
+      <!-- SOL PANEL: SEÇİLİ KLİMA ENSTRÜMAN KONSOLU -->
+      <section class="instrument-console" id="hvacConsolePanel">
+        <!-- Dinamik olarak aktif klimaya göre render edilir -->
+      </section>
+
+      <!-- SAĞ PANEL: TÜM SENSÖR DÜĞÜMLERİ VE RADAR MATRİSİ -->
+      <section class="sensor-matrix-panel">
+        <div class="panel-rack-header">
+          <div class="rack-header-title">
+            <span class="rack-tag font-mono">NODE_MATRIX</span>
+            <h3>Oda Sensör Düğümleri & mmWave Radar Varlık Takibi</h3>
+          </div>
+          <div class="orchestrator-status-badge">
+            <span class="beacon-led"></span>
+            <span class="beacon-text font-mono" id="orchestratorModeTag">OTO-KONFOR AKTİF</span>
+          </div>
+        </div>
+
+        <div class="sensor-cards-grid" id="sensorsGrid">
+          <!-- Dinamik sensör kartları buraya eklenir -->
+        </div>
+
+        <!-- ENJEKSİYON VE GÜVENLİK TELEMETRİSİ -->
+        <div class="diagnostics-terminal">
+          <div class="diag-header font-mono">ORCHESTRATOR TELEMETRY & KORUMA</div>
+          <div class="diag-rows">
+            <div class="diag-row">
+              <span class="diag-key">REFERANS ENJEKSİYONU:</span>
+              <span class="diag-val font-mono" id="diagInjectedRoom">—</span>
+            </div>
+            <div class="diag-row">
+              <span class="diag-key">KOMPRESÖR KORUMASI (ANTI-SHORT-CYCLE):</span>
+              <span class="diag-val font-mono text-emerald">AKTİF (MIN 180s GECİKME)</span>
+            </div>
+            <div class="diag-row">
+              <span class="diag-key">RADAR DEBOUNCE SÜRESİ:</span>
+              <span class="diag-val font-mono">15 SANİYE ANALİZ PENCERESİ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ALT KONSOL: EV GENELİ SENARYO ANAHTARLARI -->
+    <footer class="system-footer-rack">
+      <div class="footer-label font-mono">GLOBAL SENARYO:</div>
+      <div class="preset-switch-group" id="globalPresetGroup">
+        <button class="preset-switch active" data-preset="auto_comfort">
+          <span class="switch-indicator"></span>
+          <div class="switch-content">
+            <span class="switch-title">OTO-KONFOR</span>
+            <span class="switch-sub">mmWave Varlık Takibi</span>
+          </div>
+        </button>
+
+        <button class="preset-switch" data-preset="sleep">
+          <span class="switch-indicator"></span>
+          <div class="switch-content">
+            <span class="switch-title">GECE / UYKU</span>
+            <span class="switch-sub">21.0°C • Ultra Sessiz</span>
+          </div>
+        </button>
+
+        <button class="preset-switch" data-preset="eco">
+          <span class="switch-indicator"></span>
+          <div class="switch-content">
+            <span class="switch-title">EKO MOD</span>
+            <span class="switch-sub">20.0°C • Düşük Frekans</span>
+          </div>
+        </button>
+
+        <button class="preset-switch" data-preset="away">
+          <span class="switch-indicator"></span>
+          <div class="switch-content">
+            <span class="switch-title">DIŞARIDAYIM</span>
+            <span class="switch-sub">17.0°C • Donma Koruması</span>
+          </div>
+        </button>
+      </div>
+    </footer>
+
+    <!-- MODAL: YENİ KLİMA EKLEME -->
+    <div class="modal-backdrop" id="addHvacModal">
+      <div class="modal-dialog">
+        <div class="modal-header font-mono">
+          <span>YENİ KLİMA CİHAZI TANIMLA</span>
+          <button class="modal-close" id="closeAddHvacBtn">&times;</button>
+        </div>
+        <form class="modal-body" id="addHvacForm">
+          <div class="form-group">
+            <label class="form-label font-mono">CİHAZ KİMLİĞİ (ID):</label>
+            <input type="text" class="form-input font-mono" id="newHvacId" placeholder="ac_cocuk_odasi" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label font-mono">CİHAZ GÖRÜNEN ADI:</label>
+            <input type="text" class="form-input" id="newHvacName" placeholder="Çocuk Odası Kliması" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label font-mono">MODEL / ARAYÜZ:</label>
+            <input type="text" class="form-input" id="newHvacModel" value="Mitsubishi Electric MSZ-AP25VGK">
+          </div>
+          <div class="form-group">
+            <label class="form-label font-mono">EŞLEŞTİRİLECEK SENSÖR DÜĞÜMÜ:</label>
+            <select class="form-select font-mono" id="newHvacSensor">
+              <option value="">-- Otomatik Varlık Takibi --</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="cancelHvacModalBtn">İPTAL</button>
+            <button type="submit" class="btn-confirm">CİHAZI SİSTEME KAYDET</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: YENİ SENSÖR EKLEME -->
+    <div class="modal-backdrop" id="addSensorModal">
+      <div class="modal-dialog">
+        <div class="modal-header font-mono">
+          <span>YENİ ESP32 SENSÖR DÜĞÜMÜ EKLE</span>
+          <button class="modal-close" id="closeAddSensorBtn">&times;</button>
+        </div>
+        <form class="modal-body" id="addSensorForm">
+          <div class="form-group">
+            <label class="form-label font-mono">DÜĞÜM KİMLİĞİ (ID):</label>
+            <input type="text" class="form-input font-mono" id="newSensorId" placeholder="sensor_mutfak" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label font-mono">SENSÖR ADI:</label>
+            <input type="text" class="form-input" id="newSensorName" placeholder="Mutfak Sensörü" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label font-mono">ODA BÖLGESİ (ZONE):</label>
+            <input type="text" class="form-input" id="newSensorZone" placeholder="Mutfak" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="cancelSensorModalBtn">İPTAL</button>
+            <button type="submit" class="btn-confirm">DÜĞÜMÜ AKTİFLEŞTİR</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
