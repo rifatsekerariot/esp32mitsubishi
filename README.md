@@ -33,25 +33,25 @@ Sistem; klimaya bağlı **ESP32** düğümleri, odalara yerleştirilen çoklu **
 
 ---
 
-## ⚡ Neden Rust? ESPHome ve C++'a Karşı Üstünlükleri
+## ⚡ Neden Rust? Teknik ve Mimari Gerekçeler
 
-Eski çözümler genel olarak Arduino C++ kütüphaneleri veya ESPHome çatısı üzerine kuruludur. Ancak gerçek saha koşullarında kesintisiz 7/24 çalışma, bellek kısıtlı cihazlar (Pi Zero 2 W) ve çoklu klima orkestrasyonu söz konusu olduğunda C++ tabanlı çözümler ciddi handikaplar barındırır. Bu projede **Rust** tercih edilmesinin temel teknik nedenleri şunlardır:
+Mevcut açık kaynak CN105 çözümleri çoğunlukla C++ ile yazılmış ESPHome özel bileşenleri veya Arduino kütüphaneleridir. Bu projede sıfırdan **Rust** tercih edilmesinin somut mühendislik ve mimari nedenleri şunlardır:
 
-### 1. Bellek Güvenliği ve Sıfır Maliyetli Soyutlama (Zero-Cost Abstractions)
-* **C++ Problemi:** Ham işaretçiler (raw pointers), arabellek taşmaları (buffer overflow) ve serbest bırakılan belleğe erişim (use-after-free) gibi hatalar, UART üzerinden gelen bozuk paketlerde cihazların kilitlenmesine ve watchdog resetlerine sebep olur.
-* **Rust Çözümü:** Rust'ın mülkiyet (ownership) ve ödünç alma (borrowing) mekanizması sayesinde derleme aşamasında tüm bellek güvenliği garanti edilir. `malloc`/`free` kaynaklı sızıntılar sıfıra indirgenir.
+### 1. Bağımsız ve Taşınabilir Protokol Çekirdeği (`no_std` Pure Rust)
+* **ESPHome/C++ Bağımlılığı:** Geleneksel çözümlerde CN105 protokol kodu, ESPHome'un kendi C++ sınıflarına ve Home Assistant API'sine sıkı sıkıya bağlıdır (tightly coupled). Protokolü bağımsız bir mikrodenetleyicide, farklı bir işletim sisteminde veya merkezi bir sunucuda doğrudan derleyip kullanamazsınız.
+* **Rust Modülerliği:** Geliştirdiğimiz `cn105-proto` kütüphanesi saf (pure) Rust ile yazılmıştır ve `no_std` uyumludur. Hiçbir platforma veya işletim sistemine bağımlı değildir; hem ESP32 mikrodenetleyicisinde hem de sunucu (Pi Zero 2 W) tarafında doğrudan derlenip çalışır.
 
-### 2. Veri Yarışmalarının (Data Race) İmkansız Kılınması
-* Klima kontrolünde seri port okuma döngüsü, Wi-Fi telemetrisi, MQTT/HTTP istekleri ve sensör veri akışları eş zamanlı yürütülür.
-* Rust'ın `Send` ve `Sync` trait'leri sayesinde thread'ler veya async task'lar arasında paylaşılan durumlar (`Arc<RwLock<T>>`) donanım seviyesinde kilitlenme veya senkronizasyon hatası oluşturmadan güvenle koşturulur.
+### 2. Derleme Zamanında Tip Güvenliği ve Hata Yönetimi
+* **Ham Bellek ve İndeks Hataları:** CN105 protokolü 2400 baud hızında, değişken uzunluklu ve bayt seviyesinde paketlerle haberleşir. C++ implementasyonlarında ham dizi işaretçileri (`uint8_t*`) ve dinamik bellek tahsisleri (`std::vector`) kullanılırken yapılan ufak bir indeks veya boyut hatası çalışma zamanında bellek taşmasına (buffer overflow) ya da beklenmedik çökmelere yol açabilir.
+* **Cebirsel Veri Tipleri:** Rust'ın zengin tip sistemi (`enum`, `Option`, `Result`) sayesinde olası tüm paket durumları, geçersiz mod kombinasyonları ve eksik bayt dizilimleri derleme aşamasında kapsanmak zorundadır. Beklenmeyen bir bayt dizisi sistemi çökertmek yerine güvenli bir hata türüne (`ProtocolError`) dönüştürülür.
 
-### 3. ESPHome Döngü Bloklamalarının (Loop Blocking) Ortadan Kaldırılması
-* ESPHome tek bir `loop()` zinciri üzerinde çalışır. Klimanın CN105 portundan yanıt beklenirken yaşanan mikrosaniyelik gecikmeler sensör okumalarını ve web arayüzünü dondurabilir.
-* Rust tarafında `tokio` (merkez sunucu) ve `esp-idf-hal` / async döngüler donanım kesmelerini non-blocking mimaride işler; UART hatasız 2400 baud zamanlamasıyla kesintisiz akar.
+### 3. Eşzamanlılık ve İş Parçacığı Güvenliği (Thread Safety)
+* ESP32 üzerinde Wi-Fi telemetrisi, REST istekleri ve UART seri port okuma görevleri eşzamanlı çalışır. 
+* Rust'ın `Send` ve `Sync` kuralları ile mülkiyet (ownership) modeli, paylaşılan veriler üzerinde veri yarışması (data race) oluşmasını derleme aşamasında engeller.
 
-### 4. Raspberry Pi Zero 2 W İçin Ultra Düşük Kaynak Tüketimi
-* Python, Node.js veya ağır Home Assistant container'ları Pi Zero 2 W'nin 512 MB RAM kapasitesini hızla tüketir, swap alanı yaratır ve SD kartı aşındırır.
-* Rust ile derlenen **`core-hub`** ikili dosyası (binary), tüm web dashboard arayüzü içine gömülü (`rust-embed`) ve SQLite veritabanı aktifken dahi **15 MB'tan az RAM** tüketir, CPU kullanımı %1 seviyesindedir.
+### 4. Ekosistem Bağımsızlığı ve Düşük Kaynak Tüketimi (Pi Zero 2 W)
+* ESPHome tabanlı bir mimariyi kullanmak için arka planda Home Assistant çalıştırmak gerekir. Python tabanlı Home Assistant yığını, Raspberry Pi Zero 2 W gibi 512 MB RAM'e sahip tek kartlı bilgisayarlarda yüksek bellek ve CPU tüketimine yol açar.
+* Rust ile yazılan `core-hub` ise harici hiçbir çalışma zamanına (runtime, interpreter) ihtiyaç duymaz. REST API'si, SQLite veritabanı ve statik gömülü Web Dashboard'u (`rust-embed`) dahil tüm sistem **15-20 MB RAM** aralığında stabil olarak çalışır.
 
 ---
 
