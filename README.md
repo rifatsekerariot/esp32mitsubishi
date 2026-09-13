@@ -160,15 +160,30 @@ Herhangi bir web tarayıcısından ya da duvara monte tabletten `http://<IP-ADRE
 
 ---
 
-## 📜 Lisanslama ve Kullanım Koşulları (Dual / Non-Commercial License)
+---
 
-Bu proje **Çift Lisans (Dual License / Ticari Olmayan Kullanım)** modeli ile lisanslanmıştır:
+## 📜 Lisanslama ve Hukuki Şartlar (Dual License / PolyForm Noncommercial 1.0.0)
 
-* **🏠 Kişisel, Ev ve Hobi Kullanımı:** **ÜCRETSİZ** — Kendi evinizde, kişisel projelerinizde veya hobilerinizde dilediğiniz gibi özgürce kullanabilir, geliştirebilirsiniz.
-* **🎓 Üniversite, Eğitim ve Akademik Araştırma:** **ÜCRETSİZ** — Üniversiteler, öğrenciler, akademisyenler ve kâr amacı gütmeyen araştırma kurumları eğitim ve bilimsel projelerinde bedelsiz olarak kullanabilir.
-* **💼 Ticari, Kurumsal ve Gelir Getirici Kullanım:** **ÜCRETE TABİDİR** — Bu yazılımı veya parçalarını ticari binalarda/otellerde kullanmak, müşterilere ücretli kurulum/entegrasyon hizmeti vermek, ticari bir donanım/ürünle paketleyip satmak veya üzerinden para kazanmak isteyen kişi ve kurumlar **önceden ticari lisans satın almak ve yazılı izin almak zorundadır.**
+Bu proje, açık kaynak dünyasında ve kurumsal yazılım sektöründe kabul görmüş **Çift Lisanslama (Dual-Licensing / PolyForm Model)** standardı altında sunulmaktadır:
 
-Ticari lisanslama, kurumsal destek ve izinler için iletişim:
-* **Geliştirici & Hak Sahibi:** Rıfat Şeker (ARIOT)
-* **Web / İletişim:** [ariot.com.tr](https://ariot.com.tr) | [GitHub Profil](https://github.com/rifatsekerariot)
+| Kullanım Alanı | Uygulanan Lisans Standartı | Ücret / Şart |
+| :--- | :--- | :--- |
+| **🏠 Bireysel & Ev Otomasyonu** | **PolyForm Noncommercial 1.0.0** (`SPDX: PolyForm-Noncommercial-1.0.0`) | **ÜCRETSİZ** |
+| **🎓 Üniversite, Eğitim & Akademi** | **PolyForm Noncommercial 1.0.0** (`SPDX: PolyForm-Noncommercial-1.0.0`) | **ÜCRETSİZ** |
+| **💼 Ticari, Kurumsal & Gelir Getirici** | **ARIOT Ticari / Kurumsal Lisans (Commercial License)** | **ÜCRETE TABİDİR** |
+
+### 1. Ücretsiz Kullanım Kapsamı (PolyForm Noncommercial 1.0.0)
+Kişisel evinizde klimanızı kontrol etmek, hobi projeleri geliştirmek, üniversiteler, akademisyenler, öğrenciler ve kâr amacı gütmeyen eğitim kurumları tarafından eğitim/araştırma faaliyetlerinde bulunmak amacıyla **tamamen ücretsiz, bedelsiz ve özgürce** kullanılabilir.
+
+### 2. Ticari ve Kurumsal Kullanım (Ticari Lisans Zorunluluğu)
+Doğrudan veya dolaylı ticari kazanç sağlama amacıyla; otellerde, ticari binalarda, plazalarda kullanım, müşterilere ücret karşılığı anahtar teslim kurulum/otomasyon hizmeti sunulması, ticari bir donanım/cihaz içerisine gömülerek satılması veya SaaS/bulut hizmeti olarak pazarlanması durumunda **önceden yazılı Ticari Lisans alınması ve lisans bedelinin ödenmesi yasal bir zorunluluktur.**
+
+> 📄 Tam hukuki lisans metni için depodaki [LICENSE](LICENSE) dosyasını inceleyiniz.
+
+**Ticari Lisanslama, B2B Entegrasyon ve İletişim:**
+* **Telif Sahibi:** Rıfat Şeker (ARIOT)
+* **Web Sitesi:** [ariot.com.tr](https://ariot.com.tr)
+* **E-posta:** info@ariot.com.tr
+* **GitHub:** [@rifatsekerariot](https://github.com/rifatsekerariot)
+
 
