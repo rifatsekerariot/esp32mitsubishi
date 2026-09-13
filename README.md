@@ -6,6 +6,8 @@ Bu proje; **Mitsubishi Electric** split/multi-split klima iç ünitelerinde bulu
 
 Sistem; klimaya bağlı **ESP32** düğümleri, odalara yerleştirilen çoklu **ortam/varlık sensörleri** ve merkezi **Raspberry Pi Zero 2 W** üzerinde koşan ultra hafif bir yönetim motoru ile **modern tablet dashboard**'undan oluşur.
 
+> ⚠️ **PROJE DURUMU & CANLI TEST:** Bu proje aktif geliştirme aşamasındadır ve gerçek donanımlar üzerinde sahada canlı olarak test edilmektedir. Düzenli güncellemeler, stabilite iyileştirmeleri ve yeni özellikler eklenmeye devam etmektedir.
+
 ---
 
 ## 📸 Sistem Ekran ve Donanım Görselleri
